@@ -6,15 +6,15 @@ const Pancreatic = () => {
 
     const [patientCohort, setPatientCohort] = useState(0);
     const [sampleOrigin, setSampleOrigin] = useState(0);
-    const [age, setAge] = useState(0);
-    const [sex, setSex] = useState(0);
-    const [stage, setStage] = useState(0);
-    const [plasma_CA19_9, setPlasma_CA19_9] = useState(0);
-    const [creatinine, setCreatinine] = useState(0);
-    const [lyve1, setLyve1] = useState(0);
-    const [REG1B, setREG1B] = useState(0);
-    const [TFF1, setTFF1] = useState(0);
-    const [REG1A, setREG1A] = useState(0);
+    const [age, setAge] = useState(74);
+    const [sex, setSex] = useState(1);
+    const [stage, setStage] = useState(8);
+    const [plasma_CA19_9, setPlasma_CA19_9] = useState(1488);
+    const [creatinine, setCreatinine] = useState(1.50423);
+    const [lyve1, setLyve1] = useState(8.200958);
+    const [REG1B, setREG1B] = useState(411.938275);
+    const [TFF1, setTFF1] = useState(2021.321078);
+    const [REG1A, setREG1A] = useState(13200);
 
     const [result, setResult] = useState("");
 
@@ -22,7 +22,7 @@ const Pancreatic = () => {
         console.log({
             values: [patientCohort, sampleOrigin, age, sex, stage, plasma_CA19_9, creatinine, lyve1, REG1B, TFF1, REG1A]
         });
-        const res = await axios.post("", {
+        const res = await axios.post("http://127.0.0.1:8000/predict/", {
             values: [patientCohort, sampleOrigin, age, sex, stage, plasma_CA19_9, creatinine, lyve1, REG1B, TFF1, REG1A]
         });
         setResult(res.data.Result);

@@ -15,7 +15,7 @@ const Lung = () => {
 
             const base64String = reader.result.replace('data:', '').replace(/^.+,/, '');
 
-            axios.post('http://example.com/api/upload', {image: base64String}, {
+            axios.post('http://localhost:8000/lungpredict/', {image: base64String}, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -46,14 +46,14 @@ const Lung = () => {
                 <div className=" bg-gray-200 ml-[100px] w-[500px] rounded-full dark:bg-gray-700">
                     <div
                         className="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full"
-                        style={{width: `${percents.adeno * 100}%`}}> {percents.adeno * 100}%
+                        style={{width: `${(percents.adeno * 100).toFixed(3)}%`}}> {(percents.adeno * 100).toFixed(3)}%
                     </div>
                 </div>
                 <div className="ml-[100px] text-white">Large</div>
                 <div className=" bg-gray-200 ml-[100px] w-[500px] rounded-full dark:bg-gray-700">
                     <div
                         className="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full"
-                        style={{width: `${percents.large * 100}%`}}> {percents.large * 100}%
+                        style={{width: `${(percents.large * 100).toFixed(3)}%`}}> {(percents.large * 100).toFixed(3)}%
                     </div>
                 </div>
                 <div className="ml-[100px] text-white">Normal</div>
@@ -61,7 +61,7 @@ const Lung = () => {
                 <div className=" bg-gray-200 ml-[100px] w-[500px] rounded-full dark:bg-gray-700">
                     <div
                         className="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full"
-                        style={{width: `${percents.normal * 100}%`}}> {percents.normal * 100}%
+                        style={{width: `${(percents.normal * 100).toFixed(3)}%`}}> {(percents.normal * 100).toFixed(3)}%
                     </div>
                 </div>
                 <div className="ml-[100px] text-white">Squamous</div>
@@ -69,7 +69,7 @@ const Lung = () => {
                 <div className=" bg-gray-200 ml-[100px] w-[500px] rounded-full dark:bg-gray-700">
                     <div
                         className="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full"
-                        style={{width: `${percents.squamous * 100}%`}}> {percents.squamous * 100}%
+                        style={{width: `${(percents.squamous * 100).toFixed(3)}%`}}> {(percents.squamous * 100).toFixed(3)}%
                     </div>
                 </div>
             </div>)

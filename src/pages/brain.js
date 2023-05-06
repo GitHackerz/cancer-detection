@@ -12,11 +12,9 @@ const Brain = () => {
         const reader = new FileReader();
 
         reader.onloadend = () => {
-            console.log("event");
-
             const base64String = reader.result.replace('data:', '').replace(/^.+,/, '');
 
-            axios.post('http://example.com/api/upload', {image: base64String}, {
+            axios.post('http://127.0.0.1:8000/Brainpredict/', {image: base64String}, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -47,14 +45,14 @@ const Brain = () => {
                 <div className=" bg-gray-200 ml-[100px] w-[500px] rounded-full dark:bg-gray-700">
                     <div
                         className="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full"
-                        style={{width: `${percents.glioma * 100}%`}}> {percents.glioma * 100}%
+                        style={{width: `${percents.glioma * 100}%`}}> {(percents.glioma * 100).toFixed(2)}%
                     </div>
                 </div>
                 <div className="ml-[100px] text-black">Meningioma</div>
                 <div className=" bg-gray-200 ml-[100px] w-[500px] rounded-full dark:bg-gray-700">
                     <div
                         className="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full"
-                        style={{width: `${percents.meningioma * 100}%`}}> {percents.meningioma * 100}%
+                        style={{width: `${percents.meningioma * 100}%`}}> {(percents.meningioma * 100).toFixed(2)}%
                     </div>
                 </div>
                 <div className="ml-[100px] text-black">Notumor</div>
@@ -62,7 +60,7 @@ const Brain = () => {
                 <div className=" bg-gray-200 ml-[100px] w-[500px] rounded-full dark:bg-gray-700">
                     <div
                         className="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full"
-                        style={{width: `${percents.notumor * 100}%`}}> {percents.notumor * 100}%
+                        style={{width: `${percents.notumor * 100}%`}}> {(percents.notumor * 100).toFixed(2)}%
                     </div>
                 </div>
                 <div className="ml-[100px] text-black">Pituitary</div>
@@ -70,7 +68,7 @@ const Brain = () => {
                 <div className=" bg-gray-200 ml-[100px] w-[500px] rounded-full dark:bg-gray-700">
                     <div
                         className="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full"
-                        style={{width: `${percents.pituitary * 100}%`}}> {percents.pituitary * 100}%
+                        style={{width: `${percents.pituitary * 100}%`}}> {(percents.pituitary * 100).toFixed(2)}%
                     </div>
                 </div>
             </div>)
