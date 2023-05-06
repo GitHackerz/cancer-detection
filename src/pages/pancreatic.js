@@ -1,35 +1,36 @@
 import Background from '../assets/Pancreatic.jpg';
 import {useState} from "react";
+import axios from "axios";
 
 const Pancreatic = () => {
 
-    const [patientCohort, setPatientCohort] = useState("");
-    const [sampleOrigin, setSampleOrigin] = useState("");
-    const [age, setAge] = useState("");
-    const [sex, setSex] = useState("M");
-    const [stage, setStage] = useState("");
-    const [plasma_CA19_9, setPlasma_CA19_9] = useState("");
-    const [creatinine, setCreatinine] = useState("");
-    const [lyve1, setLyve1] = useState("");
-    const [REG1B, setREG1B] = useState("");
-    const [TFF1, setTFF1] = useState("");
-    const [REG1A, setREG1A] = useState("");
+    const [patientCohort, setPatientCohort] = useState(0);
+    const [sampleOrigin, setSampleOrigin] = useState(0);
+    const [age, setAge] = useState(0);
+    const [sex, setSex] = useState(0);
+    const [stage, setStage] = useState(0);
+    const [plasma_CA19_9, setPlasma_CA19_9] = useState(0);
+    const [creatinine, setCreatinine] = useState(0);
+    const [lyve1, setLyve1] = useState(0);
+    const [REG1B, setREG1B] = useState(0);
+    const [TFF1, setTFF1] = useState(0);
+    const [REG1A, setREG1A] = useState(0);
 
-    const [data, setData] = useState({});
+    const [result, setResult] = useState("");
 
     const onSubmit = async () => {
         console.log({
             values: [patientCohort, sampleOrigin, age, sex, stage, plasma_CA19_9, creatinine, lyve1, REG1B, TFF1, REG1A]
-        })
-        // const res = await axios.post("", {
-        //     values: [patientCohort, sampleOrigin, age, sex, diagnosis, benignSampleDiagnosis, plasma_CA19_9, creatinine, lyve1, REG1B, TFF1, REG1A]
-        // });
-        // setData(res.data);
+        });
+        const res = await axios.post("", {
+            values: [patientCohort, sampleOrigin, age, sex, stage, plasma_CA19_9, creatinine, lyve1, REG1B, TFF1, REG1A]
+        });
+        setResult(res.data.Result);
     }
 
     return (<div className="bg-cover h-full bg-no-repeat flex items-center px-16 pt-[120px] pb-[20px]"
                  style={{backgroundImage: `url(${Background})`}}>
-        <div className="flex flex-col items-center">
+        <div className="flex flex-row items-center w-full ">
             <form className="w-full max-w-lg bg-white p-10 rounded-xl">
                 <div className="flex flex-wrap -mx-3 mb-6">
                     <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -39,7 +40,7 @@ const Pancreatic = () => {
                         </label>
                         <input
                             className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                            id="grid-first-name" type="text" placeholder="Patient Cohort" value={patientCohort}
+                            id="grid-first-name" type="number" placeholder="Patient Cohort" value={patientCohort}
                             onChange={(e) => setPatientCohort(e.target.value)}/>
                         {/*<p className="text-red-500 text-xs italic">Please fill out this field.</p>*/}
                     </div>
@@ -50,7 +51,7 @@ const Pancreatic = () => {
                         </label>
                         <input
                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                            id="grid-last-name" type="text" placeholder="Sample Origin" value={sampleOrigin}
+                            id="grid-last-name" type="number" placeholder="Sample Origin" value={sampleOrigin}
                             onChange={(e) => setSampleOrigin(e.target.value)}/>
                     </div>
                 </div>
@@ -63,7 +64,7 @@ const Pancreatic = () => {
                         </label>
                         <input
                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                            id="grid-city" type="text" placeholder="Age" value={age}
+                            id="grid-city" type="number" placeholder="Age" value={age}
                             onChange={(e) => setAge(e.target.value)}/>
                     </div>
                     <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
@@ -78,8 +79,8 @@ const Pancreatic = () => {
                                 value={sex}
                                 onChange={(e) => setSex(e.target.value)} // update sex when user selects an option
                             >
-                                <option value="M">Male</option>
-                                <option value="F">Female</option>
+                                <option value="0">Male</option>
+                                <option value="1">Female</option>
                             </select>
                             <div
                                 className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
@@ -98,7 +99,7 @@ const Pancreatic = () => {
                         </label>
                         <input
                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                            id="grid-zip" type="text" placeholder="Stage" value={stage}
+                            id="grid-zip" type="number" placeholder="Stage" value={stage}
                             onChange={(e) => setStage(e.target.value)}/>
                     </div>
                 </div>
@@ -110,7 +111,7 @@ const Pancreatic = () => {
                         </label>
                         <input
                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                            id="grid-city" type="text" placeholder="Plasma_CA19_9" value={plasma_CA19_9}
+                            id="grid-city" type="number" placeholder="Plasma_CA19_9" value={plasma_CA19_9}
                             onChange={(e) => setPlasma_CA19_9(e.target.value)}/>
                     </div>
                     <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
@@ -120,7 +121,7 @@ const Pancreatic = () => {
                         </label>
                         <input
                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                            id="grid-city" type="text" placeholder="Creatinine" value={creatinine}
+                            id="grid-city" type="number" placeholder="Creatinine" value={creatinine}
                             onChange={(e) => setCreatinine(e.target.value)}/>
                     </div>
                     <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
@@ -130,7 +131,7 @@ const Pancreatic = () => {
                         </label>
                         <input
                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                            id="grid-zip" type="text" placeholder="LYVE1" value={lyve1}
+                            id="grid-zip" type="number" placeholder="LYVE1" value={lyve1}
                             onChange={(e) => setLyve1(e.target.value)}/>
                     </div>
                 </div>
@@ -142,7 +143,7 @@ const Pancreatic = () => {
                         </label>
                         <input
                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                            id="grid-city" type="text" placeholder="REG1B" value={REG1B}
+                            id="grid-city" type="number" placeholder="REG1B" value={REG1B}
                             onChange={(e) => setREG1B(e.target.value)}/>
                     </div>
                     <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
@@ -152,7 +153,7 @@ const Pancreatic = () => {
                         </label>
                         <input
                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                            id="grid-city" type="text" placeholder="TFF1" value={TFF1}
+                            id="grid-city" type="number" placeholder="TFF1" value={TFF1}
                             onChange={(e) => setTFF1(e.target.value)}/>
                     </div>
                     <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
@@ -162,7 +163,7 @@ const Pancreatic = () => {
                         </label>
                         <input
                             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                            id="grid-zip" type="text" placeholder="REG1A" value={REG1A}
+                            id="grid-zip" type="number" placeholder="REG1A" value={REG1A}
                             onChange={(e) => setREG1A(e.target.value)}/>
                     </div>
                 </div>
@@ -174,7 +175,13 @@ const Pancreatic = () => {
 
                 </div>
             </form>
+            <div className="flex justify-center items-center ml-[300px]">
+                <h1 className="text-2xl font-bold text-white">
+                    {result}
+                </h1>
+            </div>
         </div>
+
     </div>);
 }
 

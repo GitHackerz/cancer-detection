@@ -1,10 +1,30 @@
 import Background from "../assets/Ovarian.jpg";
-import handleFileInputChange from "../utils/handleFile";
 import FileInputButton from "../components/fileInputButton";
 import {useState} from "react";
+import axios from "axios";
 
 const Ovarian   = () => {
     const [percents, setPercents] = useState(0);
+    const handleFileInputChange = (event,percents, setPercents) => {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+
+        reader.onloadend = () => {
+            const base64String = reader.result.replace('data:', '').replace(/^.+,/, '');
+
+            axios.post('http://example.com/api/upload', { image: base64String }, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => {
+                    setPercents(response.data);
+                })
+                .catch(error => console.error(error));
+        };
+
+        reader.readAsDataURL(file);
+    };
 
     return (<div className="bg-cover h-full bg-no-repeat flex items-center px-16"
                  style={{backgroundImage: `url(${Background})`}}>
@@ -17,6 +37,7 @@ const Ovarian   = () => {
                 <FileInputButton onChange={(e) => handleFileInputChange(e, percents, setPercents)}/>
             </div>
         </div>
+
     </div>);
 }
 
